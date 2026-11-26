@@ -437,8 +437,8 @@ function createSuccessMsg() {
         <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
           <i class="fa-solid fa-check text-4xl text-white"></i>
         </div>
-        <h3 class="text-2xl font-bold mb-3">جهزنا رسالتك في تطبيق البريد</h3>
-        <p class="text-slate-400 mb-6">اضغط إرسال في تطبيق البريد عندك ورسالتك هتوصلني على الإيميل مباشرة.</p>
+        <h3 class="text-2xl font-bold mb-3">جهزنا رسالتك في واتساب</h3>
+        <p class="text-slate-400 mb-6">اضغط إرسال في واتساب ورسالتك هتوصلني مباشرة.</p>
         <button class="success-popup-close bg-gradient-to-r from-primary to-secondary px-8 py-3 rounded-xl font-bold hover:shadow-lg transition-all duration-300">
           حسناً
         </button>
@@ -523,16 +523,18 @@ function send() {
   var email = validateEmail();
   var details = validateDetails();
   if (name && email && details) {
-    var subject = "رسالة من البورتفوليو: " + form.fullName.value.trim();
-    var body =
-      "الاسم: " + form.fullName.value.trim() +
+    var phoneField = document.getElementById("phone");
+    var text =
+      "رسالة من البورتفوليو" +
+      "\nالاسم: " + form.fullName.value.trim() +
       "\nالبريد: " + form.email.value.trim() +
+      (phoneField && phoneField.value.trim() ? "\nالهاتف: " + phoneField.value.trim() : "") +
       "\n\n" + form.projectDetails.value.trim();
-    window.location.href =
-      "mailto:yossef.mohamed.2005.ym@gmail.com?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(body);
+    window.open(
+      "https://wa.me/201112723730?text=" + encodeURIComponent(text),
+      "_blank",
+      "noopener"
+    );
     clearForm();
     createSuccessMsg();
   }
